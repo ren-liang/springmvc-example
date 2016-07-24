@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd"
+		default-lazy-init="false">
+	<!-- Tomcat配置JNDI数据源 -->
+	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="java:comp/env/mydataSource" /> </bean> -->
+
+	<!-- Weblogic配置JNDI数据源 -->
+	<bean id="jndidataSource" class="org.springframework.jndi.JndiObjectFactoryBean"
+		lazy-init="true">
+		<property name="jndiName" value="dataSource" />
+	</bean>
+	
+	<!-- 配置阿里巴巴Druid数据源 -->
+	<bean id="localdataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 驱动名称 -->
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${initialSize}" />
+		<property name="minIdle" value="${minIdle}" />
+		<property name="maxActive" value="${maxActive}" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${maxWait}" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="${testWhileIdle}" />
+		<property name="testOnBorrow" value="${testOnBorrow}" />
+		<property name="testOnReturn" value="${testOnReturn}" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="${poolPreparedStatements}" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="${maxPoolPreparedStatementPerConnectionSize}" />
+
+		<!-- 配置监控统计拦截的filters -->
+		<!-- <property name="filters" value="${filters}" /> -->
+		<property name="proxyFilters">
+			<list>
+				<ref bean="log-filter" />
+			</list>
+		</property>
+	</bean>
+	<!-- 配置日期输出 -->
+	<bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+		<property name="resultSetLogEnabled" value="false" />
+		<property name="statementExecutableSqlLogEnable" value="true" />
+	</bean>
+	
+	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+		<!-- 配置SQL慢的标准，执行时间超过slowSqlMillis的就是慢，缺省值为3000，也就是3秒。 同<property name="connectionProperties" 
+			value="druid.stat.slowSqlMillis=5000" /> -->
+		<property name="slowSqlMillis" value="10000" />
+		<property name="logSlowSql" value="true" />
+		<!-- 合并参数相同的SQL 同 
+		<property name="filters" value="mergeStat" /> 或者
+		<property name="connectionProperties" value="druid.stat.mergeSql=true" /> 或者
+		<property name="mergeSql" value="true" />
+		-->
+	</bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="${datasourceType}dataSource" />
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+		<property name="dataSource" ref="${datasourceType}dataSource" />
+	</bean>
+	
+	<bean id="baseDao" class="com.dcits.springmvc.kernel.dao.impl.BaseDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+
+</beans>

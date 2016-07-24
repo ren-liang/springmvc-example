@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd  
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  
+                        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-lazy-init="true">
+	
+ 	<!-- control所在的包路径  -->
+	<context:component-scan base-package="com.dcits.springmvc.controller" annotation-config="true"/>
+	<!-- 启用注解 -->
+	<mvc:annotation-driven enable-matrix-variables="true" conversion-service="conversionService"/> 
+	
+	<!-- 自定义的将字符转换为User对象的转换器 -->
+	<bean id="stringToUserConverter" class="com.dcits.springmvc.utils.StringToDateConverter">
+		<constructor-arg type="java.lang.String" value="yyyy-MM-dd"/>
+	</bean>
+	
+	<!-- 自定义的将字符串转换为Date类型的格式化器 -->	
+<!-- 	<bean id="stringToDateFormatter" class="com.dcits.springmvc.utils.StringToDateFormatter">
+		<constructor-arg type="java.lang.String" value="yyyy-MM-dd"/>
+	</bean> -->
+	
+	<!-- 声明转换器和格式化器工厂Bean 需要在annotation-driven中注册-->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<ref bean="stringToUserConverter"/>
+			</set>
+		</property>
+<!-- 		<property name="formatters">
+			<set>
+				<ref bean="stringToDateFormatter"/>
+			</set>
+		</property> -->
+	</bean>
+
+	<!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL -->
+	<mvc:default-servlet-handler />
+	<mvc:resources location="/" mapping="/**/*.js" />
+	<mvc:resources location="/" mapping="/**/*.css" />
+	<mvc:resources location="/" mapping="/**/*.png" />
+	<mvc:resources location="/" mapping="/**/*.gif" />
+	
+	<!-- 视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 文件上传解析器 id必须为multipartResolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
+
+</beans>

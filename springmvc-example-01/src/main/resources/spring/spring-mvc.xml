@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd  
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  
+                        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-lazy-init="true">
+	
+ 	<!-- control所在的包路径  -->
+	<context:component-scan base-package="com.dcits.springmvc.controller" />
+	<!-- 启用注解 -->
+	<mvc:annotation-driven enable-matrix-variables="true"/> 
+
+	<!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL -->
+	<mvc:default-servlet-handler />
+	<mvc:resources location="/" mapping="/**/*.js" />
+	<mvc:resources location="/" mapping="/**/*.css" />
+	<mvc:resources location="/" mapping="/**/*.png" />
+	<mvc:resources location="/" mapping="/**/*.gif" />
+	
+	<!-- 视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 文件上传解析器 id必须为multipartResolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
+
+</beans>
