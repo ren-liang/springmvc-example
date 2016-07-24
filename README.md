@@ -1,2 +1,2 @@
 # springmvc-example
-Spring NVC 学习
+Spring MVC 学习
