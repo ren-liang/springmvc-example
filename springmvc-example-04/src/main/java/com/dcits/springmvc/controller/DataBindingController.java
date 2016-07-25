@@ -137,6 +137,7 @@ public class DataBindingController {
 	public String list(BookListForm bookListForm){
 		return "list:"+bookListForm;
 	}
+	
 	/***
 	 * 绑定Set
 	 * Spring MVC对于Set的绑定与List的类似需要定义包装类
@@ -165,8 +166,8 @@ public class DataBindingController {
 	 */
 	@RequestMapping("map")
 	@ResponseBody
-	public String map(BookMapForm BookMapForm) {
-		return "map:" + BookMapForm;
+	public String map(BookMapForm bookMapForm) {
+		return "map:" + bookMapForm;
 	}
 	
 	/****
