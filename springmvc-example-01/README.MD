@@ -1,9 +1,72 @@
-»ùÓÚxmlÅäÖÃµÄSpring MVC
-1.ÔÚweb.xmlÅäÖÃDispacherServlet£¬Ó³ÉäÂ·¾¶¡¢spring mvcÅäÖÃÎÄ¼ş¼ÓÔØÂ·¾¶
-2.ÅäÖÃspring mvc°üÉ¨ÃèÂ·¾¶
-3.ÆôÓÃ×¢½â
-4.¶Ô¾²Ì¬×ÊÔ´ÎÄ¼şµÄ´¦Àí
-5.ÊÓÍ¼½âÎöÆ÷
-6.¿ª·¢×Ô¼ºµÄcontroller
-·ÃÎÊµØÖ·£º
-http://localhost:8080/springmvc-example-01/helloworld
+##åŸºäºxmlé…ç½®çš„Spring MVC
+---
+####åœ¨web.xmlé…ç½®DispacherServletï¼Œæ˜ å°„è·¯å¾„ã€spring mvcé…ç½®æ–‡ä»¶åŠ è½½è·¯å¾„
+```
+<servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>classpath*:spring/spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+</servlet-mapping>
+```
+####é…ç½®spring-mvc.xmlé…ç½®æ–‡ä»¶
+  - é…ç½®åŒ…æ‰«æè·¯å¾„å¹¶å¯ç”¨æ³¨è§£
+```
+  <!-- controlæ‰€åœ¨çš„åŒ…è·¯å¾„  -->
+  <context:component-scan base-package="com.dcits.springmvc.controller" />
+  <!-- å¯ç”¨æ³¨è§£ -->
+  <mvc:annotation-driven enable-matrix-variables="true"/> 
+```
+  - è§†å›¾è§£æå™¨
+```
+  <!-- è§†å›¾è§£æå™¨ -->
+  <bean
+  	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  	<property name="prefix" value="/WEB-INF/" />
+  	<property name="suffix" value=".jsp" />
+  </bean>
+```
+  - å¯¹é™æ€èµ„æºæ–‡ä»¶çš„å¤„ç†
+```
+  <!-- å®¹å™¨é»˜è®¤çš„DefaultServletHandlerå¤„ç† æ‰€æœ‰é™æ€å†…å®¹ä¸æ— RequestMappingå¤„ç†çš„URL -->
+  <mvc:default-servlet-handler />
+  <mvc:resources location="/" mapping="/**/*.js" />
+  <mvc:resources location="/" mapping="/**/*.css" />
+  <mvc:resources location="/" mapping="/**/*.png" />
+  <mvc:resources location="/" mapping="/**/*.gif" />
+```
+####å¼€å‘è‡ªå·±çš„controller
+```
+  @Controller
+  public class HelloWorldController {
+  	//http://localhost:8080/springmvc-example-01/helloworld
+  	@RequestMapping(value="helloworld")
+  	public String show(Model model) {
+  		//ä¸šåŠ¡é€»è¾‘å±‚è¿”å›æ•°æ®æ¨¡å‹
+  		model.addAttribute("world", "World");
+  		return "index";
+  	}
+  }
+```
+####è§†å›¾ index.jsp
+```
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Spring MVC Demo</title>
+  </head>
+  <body>
+	  Hello ${world} <br>
+  </body>
+</html>
+```
+
+è®¿é—®åœ°å€:http://localhost:8080/springmvc-example-01/helloworld
