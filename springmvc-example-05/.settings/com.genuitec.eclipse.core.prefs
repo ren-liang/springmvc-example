@@ -1,3 +1,3 @@
 eclipse.preferences.version=1
-validator.Checked=src/main/webapp/index.html
+validator.Checked=src/main/webapp/WEB-INF/book,src/main/webapp/index.html
 validator.Unchecked=
