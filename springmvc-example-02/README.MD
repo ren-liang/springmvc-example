@@ -1,6 +1,5 @@
-»ùÓÚJavaµÄSpring MVCÅäÖÃ
-1.¶¨ÒåRootConfig¼´£ºContextLoadListenerÓ¦ÓÃÉÏÏÂÎÄµÄÅäÖÃÀà
-2.¶¨ÒåWebConfig¼´£ºDispacherServlet¼ÓÔØÓ¦ÓÃÉÏÏÂÎÄµÄÅäÖÃÀà
-3.ÊµÏÖAbstractAnnotationConfigDispatcherServletInitializerÀàµÄ·½·¨
-·ÃÎÊµØÖ·£º
-http://localhost:8080/springmvc-example-02/helloworld
+## åŸºäºJavaçš„Spring MVCé…ç½®
+### 1.å®šä¹‰RootConfigå³ï¼šContextLoadListeneråº”ç”¨ä¸Šä¸‹æ–‡çš„é…ç½®ç±»
+### 2.å®šä¹‰WebConfigå³ï¼šDispacherServletåŠ è½½åº”ç”¨ä¸Šä¸‹æ–‡çš„é…ç½®ç±»
+### 3.å®ç°AbstractAnnotationConfigDispatcherServletInitializerç±»çš„æ–¹æ³•
+## è®¿é—®åœ°å€ï¼šhttp://localhost:8080/springmvc-example-02/helloworld
