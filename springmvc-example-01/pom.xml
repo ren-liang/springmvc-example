@@ -10,7 +10,7 @@
 	</parent>
 	<artifactId>springmvc-example-01</artifactId>
 	<packaging>war</packaging>
-	<name>springmvc-example-01</name>
+	<name>springmvc-example-01 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>

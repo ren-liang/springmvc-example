@@ -14,4 +14,6 @@ public interface IBookService {
 
 	List<Book> getAllBooks();
 
+	void deleteById(Integer id);
+
 }

@@ -13,21 +13,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dcits.springmvc.model.Product;
 /***
- * äº§å“æ§åˆ¶å™¨
- * Spring mvcé…ç½®æ–‡ä»¶é…ç½®æ³¨è§£æ‰«æåŒ…è·¯å¾„ï¼Œå¹¶å¼€å¯æ³¨è§£
- * ä½¿ç”¨@Controllerå£°æ˜è¯¥ç±»æ˜¯ä¸€ä¸ªController
- * 
- * æ³¨è§£@RequestMapping
- * ï¼ˆ1ï¼‰ä½œç”¨èŒƒå›´ä½œç”¨ä¸æ–¹æ³•æˆ–è€…ç±»çº§åˆ«
- * 	        ç±»çº§åˆ«åˆ™è¡¨ç¤ºè¯¥ç±»çš„æ¯ä¸ªæ–¹æ³•çš„urlå‰ç¼€
- * ï¼ˆ2ï¼‰å±æ€§è¯´æ˜
- *     valueï¼šæŒ‡å®šè¯·æ±‚çš„åœ°å€
- * 	   methodï¼šæŒ‡å®šè¯·æ±‚çš„methodç±»å‹ï¼Œå€¼æ˜¯ä¸€ä¸ªæ•°ç»„å­—ç¬¦é•¿æ•°ç»„ï¼Œå¦‚æœåªæœ‰ä¸€ä¸ªå€¼å¯ä»¥ä¸ç”¨å¤§æ‹¬å·
- * 	   consumesï¼š æŒ‡å®šå¤„ç†è¯·æ±‚çš„æäº¤å†…å®¹ç±»å‹ï¼ˆContent-Typeï¼‰ï¼Œä¾‹å¦‚application/json, text/html;
- * 	   produces: æŒ‡å®šè¿”å›çš„å†…å®¹ç±»å‹ï¼Œä»…å½“requestè¯·æ±‚å¤´ä¸­çš„(Accept)ç±»å‹ä¸­åŒ…å«è¯¥æŒ‡å®šç±»å‹æ‰è¿”å›ï¼›
- * 	   paramsï¼š æŒ‡å®šrequestä¸­å¿…é¡»åŒ…å«æŸäº›å‚æ•°å€¼æ˜¯ï¼Œæ‰è®©è¯¥æ–¹æ³•å¤„ç†ã€‚
- * 	   headersï¼š æŒ‡å®šrequestä¸­å¿…é¡»åŒ…å«æŸäº›æŒ‡å®šçš„headerå€¼ï¼Œæ‰èƒ½è®©è¯¥æ–¹æ³•å¤„ç†è¯·æ±‚ã€‚
+ * ²úÆ·¿ØÖÆÆ÷
+ * Spring mvcÅäÖÃÎÄ¼şÅäÖÃ×¢½âÉ¨Ãè°üÂ·¾¶£¬²¢¿ªÆô×¢½â
+ * Ê¹ÓÃ@ControllerÉùÃ÷¸ÃÀàÊÇÒ»¸öController
+ * Ê¹ÓÃ@RequestMappingÖ¸¶¨¿ÉÒÔ´¦ÀíÄÄĞ© URLÇëÇóÒÔ¼°¶ÔÓ¦µÄhttpÇëÇó·½Ê½,
+ * ×÷ÓÃÔÚÀà¼¶±ğÔò±íÊ¾¸ÃÀàµÄÃ¿¸ö·½·¨µÄurlÇ°×º
  * @author renliangd
+ *
  */
 
 @Controller
@@ -36,47 +28,47 @@ public class ProductController {
 	private static final Log log = LogFactory.getLog(ProductController.class);
 	
 	/***
-	 * äº§å“å½•å…¥
-	 * @return è¿”å›è§†å›¾çš„é€»è¾‘è·¯å¾„
+	 * ½« http://localhost:8080/springmvc-example-03/product/inputproductµÄurl°ó¶¨µ½´Ë·½·¨
+	 * ×¢½â@RequestMappingµÄvalueÓÃÓÚÖ¸¶¨°ó¶¨µÄurl£¬methodÊôĞÔÊÇÒ»¸öÊı×éÀàĞÍÓÃÓÚÖ¸¶¨httpÇëÇóÀàĞÍ¿ÉÒÔÎª¿ÕÔòÄ¬ÈÏ´¦ÀíËùÓĞÀàĞÍ,Èç¹ûÖ»ÓĞÒ»¸öÖµ¿ÉÒÔ²»ÓÃ´óÀ¨ºÅ
+	 * @return ·µ»ØÊÓÍ¼µÄÂß¼­Â·¾¶
 	 */
 	//http://localhost:8080/springmvc-example03/product/inputproduct
 	@RequestMapping(value = "/inputproduct", method = { RequestMethod.GET, RequestMethod.POST })
 	public String inputProduct() {
-		log.info("inputproductè¢«è°ƒç”¨äº†â€¦â€¦");
+		log.info("inputproduct±»µ÷ÓÃÁË¡­¡­");
 		return "product/productform";
 	}
 	
 	/***
-	 * ä¿å­˜äº§å“ä¿¡æ¯
-	 * 
-	 * å…³äºè¯·æ±‚å¤„ç†æ–¹æ³•ï¼š
-	 * 		ï¼ˆ1ï¼‰å‚æ•°ç±»å‹ 
-	 * 		   ServletRequestã€HttpServletRequestã€ServletResponseã€HttpSessionç­‰Servlet APIç±»å‹ï¼Œ
-	 * 		         åŒæ—¶å…è®¸å‘½ä»¤æˆ–è‡ªå®šä¹‰çš„è¡¨å•å¯¹è±¡ï¼ŒModelã€Mapã€java IOç­‰ç±»å‹
-	 * 		ï¼ˆ2ï¼‰è¿”å›å€¼ç±»å‹
-	 * 		   ModelAndViewã€Modelã€Mapã€Viewã€Stringã€voidç­‰
-	 * @param product
-	 * @return Stringç±»å‹çš„é€»è¾‘è§†å›¾çš„è·¯å¾„
+	 * ±£´æ²úÆ·ĞÅÏ¢
+	 * @param product form±íµ¥Ìá½»Ö®ºóSpring MVC»á¸ù¾İform±íµ¥ÖĞµÄÊı¾İ¸ù¾İnameÊôĞÔ×Ô¶¯½øĞĞÊı¾İµÄ·â×°ÊµÏÖÊı¾İ°ó¶¨
+	 * ¹ØÓÚÇëÇó´¦Àí·½·¨£º
+	 * 		£¨1£©²ÎÊıÀàĞÍ 
+	 * 		   ServletRequest¡¢HttpServletRequest¡¢ServletResponse¡¢HttpSessionµÈServlet APIÀàĞÍ£¬
+	 * 		         Í¬Ê±ÔÊĞíÃüÁî»ò×Ô¶¨ÒåµÄ±íµ¥¶ÔÏó£¬Model¡¢Map¡¢java IOµÈÀàĞÍ
+	 * 		£¨2£©·µ»ØÖµÀàĞÍ
+	 * 		   ModelAndView¡¢Model¡¢Map¡¢View¡¢String¡¢voidµÈ
+	 * @return StringÀàĞÍµÄÂß¼­ÊÓÍ¼µÄÂ·¾¶
 	 */
 	//http://localhost:8080/springmvc-example-03/product/saveproduct
 	@RequestMapping(value = "saveproduct", method = RequestMethod.POST)
 	public String saveProduct(Product product, Model model) {
-		log.info("inputproductè¢«è°ƒç”¨äº†â€¦â€¦");
-		log.info("æ¥æ”¶åˆ°çš„productçš„å€¼ï¼š" + product.toString());
-		/***
-		 * è°ƒç”¨Serviceå±‚ä¿å­˜product
+		log.info("inputproduct±»µ÷ÓÃÁË¡­¡­");
+		log.info("½ÓÊÕµ½µÄproductµÄÖµ£º" + product.toString());
+		/*
+		 * µ÷ÓÃService²ã±£´æproduct
 		 */
-		//Spring MVC ä¼šè‡ªåŠ¨åˆå§‹åŒ–modelå¯¹è±¡,å¯ä»¥é€šè¿‡modelå¯¹è±¡å‘è§†å›¾æ·»åŠ å±•ç¤ºæ‰€éœ€çš„æ•°æ®
+		//Spring MVC »á×Ô¶¯³õÊ¼»¯model¶ÔÏó,¿ÉÒÔÍ¨¹ımodel¶ÔÏóÏòÊÓÍ¼Ìí¼ÓÕ¹Ê¾ËùĞèµÄÊı¾İ
 		model.addAttribute("product", product);
 		return "product/productdetails";
 	}
 	
 	/***
-	 * ä¿å­˜äº§å“åé‡å®šå‘
-	 *  å¿…è¦çš„æ—¶å€™ä½¿ç”¨é‡å®šå‘
-	 * 	ç”¨æˆ·è¡¨å•æäº¤ä¹‹åå¦‚æœç”¨æˆ·é‡æ–°åŠ è½½é¡µé¢ä¼šå‡ºç°è¡¨å•é‡å¤æäº¤çš„ç°è±¡ï¼Œé¿å…è¡¨å•é‡å¤æäº¤çš„å®ç°æ–¹å¼å¾ˆå¤šï¼Œ
-	 *  åœ¨æµè§ˆå™¨ç«¯æˆ‘ä»¬å¯ä»¥é€šè¿‡jsæ§åˆ¶è¡¨å•é‡å¤æäº¤ï¼Œåœ¨æœåŠ¡å™¨ç«¯å¯ä»¥é€šè¿‡è¿›å…¥è¡¨å•é¡µé¢çš„æœåŠ¡å™¨ç«¯ç”Ÿæˆtokenè¡¨å•æäº¤æ—¶é€šè¿‡åˆ¤æ–­tokenæ˜¯å¦æœ‰æ•ˆé¿å…é‡å¤æäº¤
-	 *  ä¹Ÿå¯ä»¥ä½¿ç”¨è¡¨å•æäº¤ä¹‹åé‡å®šå‘å®ç°
+	 * ±£´æ²úÆ·ºóÖØ¶¨Ïò
+	 * ±ØÒªµÄÊ±ºòÊ¹ÓÃÖØ¶¨Ïò
+	 * 	ÓÃ»§±íµ¥Ìá½»Ö®ºóÈç¹ûÓÃ»§ÖØĞÂ¼ÓÔØÒ³Ãæ»á³öÏÖ±íµ¥ÖØ¸´Ìá½»µÄÏÖÏó£¬±ÜÃâ±íµ¥ÖØ¸´Ìá½»µÄÊµÏÖ·½Ê½ºÜ¶à£¬
+	 *  ÔÚä¯ÀÀÆ÷¶ËÎÒÃÇ¿ÉÒÔÍ¨¹ıjs¿ØÖÆ±íµ¥ÖØ¸´Ìá½»£¬ÔÚ·şÎñÆ÷¶Ë¿ÉÒÔÍ¨¹ı½øÈë±íµ¥Ò³ÃæµÄ·şÎñÆ÷¶ËÉú³Étoken±íµ¥Ìá½»Ê±Í¨¹ıÅĞ¶ÏtokenÊÇ·ñÓĞĞ§±ÜÃâÖØ¸´Ìá½»
+	 *  Ò²¿ÉÒÔÊ¹ÓÃ±íµ¥Ìá½»Ö®ºóÖØ¶¨ÏòÊµÏÖ
 	 * @param product
 	 * @param model
 	 * @return
@@ -84,47 +76,35 @@ public class ProductController {
 	//http://localhost:8080/springmvc-example-03/product/newsaveproduct
 	@RequestMapping(value = "newsaveproduct", method = RequestMethod.POST)
 	public String saveProductAndRedirect(Product product,RedirectAttributes redirectAttributes) {
-		log.info("saveproductè¢«è°ƒç”¨äº†â€¦â€¦");
-		log.info("æ¥æ”¶åˆ°çš„productçš„å€¼ï¼š" + product.toString());
+		log.info("saveproduct±»µ÷ÓÃÁË¡­¡­");
+		log.info("½ÓÊÕµ½µÄproductµÄÖµ£º" + product.toString());
 		/*
-		 * è°ƒç”¨Serviceå±‚ä¿å­˜product
+		 * µ÷ÓÃService²ã±£´æproduct
 		 */
-		//IDæ˜¯ä¸»é”®
+		//IDÊÇÖ÷¼ü
 		product.setId(1);
 		
-		//é»˜è®¤é‡å®šå‘æ— æ³•è½»æ¾çš„ä¼ é€’å‚æ•°ç»™ç›®æ ‡é¡µé¢Springæä¾›äº†flashå±æ€§é€šè¿‡è¯¥å±æ€§å¯ä»¥æ–¹ä¾¿çš„ç»™é‡å®šå‘çš„ç›®æ ‡é¡µé¢ä¼ å‚
-		String msg = "ä¿å­˜äº§å“ä¿¡æ¯æˆåŠŸ";
+		//Ä¬ÈÏÖØ¶¨ÏòÎŞ·¨ÇáËÉµÄ´«µİ²ÎÊı¸øÄ¿±êÒ³ÃæSpringÌá¹©ÁËflashÊôĞÔÍ¨¹ı¸ÃÊôĞÔ¿ÉÒÔ·½±ãµÄ¸øÖØ¶¨ÏòµÄÄ¿±êÒ³Ãæ´«²Î
+		String msg = "±£´æ²úÆ·ĞÅÏ¢³É¹¦";
 		redirectAttributes.addFlashAttribute("msg", msg);
 		return "redirect:product/viewproduct/" + product.getId()+"?param1=123";
 	}
 	
 	/***
-	 * æ ¹æ®IDè·å–äº§å“ä¿¡æ¯
-	 * æ³¨è§£@PathVariable
-	 *   (1)ä½œç”¨äºæ–¹æ³•å‚æ•°
-	 * 	      è·å–åŸºäºè·¯å¾„çš„è¯·æ±‚å‚æ•°å˜é‡ï¼Œåœ¨è¯·æ±‚è·¯å¾„ä¸­ä½¿ç”¨{}é™å®šè·¯å¾„å‚æ•°ï¼Œä½¿ç”¨@PathVariableå°†è·¯å¾„å‚æ•°ç»‘å®šåˆ°æ–¹æ³•å‚æ•°
-	 * 	 (2)å±æ€§è¯´æ˜
-	 *    valueï¼šurlæ¨¡æ¿ä¸­çš„å‚æ•°å
+	 * ¸ù¾İID»ñÈ¡²úÆ·ĞÅÏ¢
+	 * ×¢½â@PathVariable
+	 * 		»ñÈ¡»ùÓÚÂ·¾¶µÄÇëÇó²ÎÊı±äÁ¿£¬ÔÚÇëÇóÂ·¾¶ÖĞÊ¹ÓÃ{}ÏŞ¶¨Â·¾¶²ÎÊı£¬Ê¹ÓÃ@PathVariable½«Â·¾¶²ÎÊı°ó¶¨µ½·½·¨²ÎÊı
 	 * 
-	 * æ³¨è§£@RequestParamç”¨äºä»æŸ¥è¯¢å­—ç¬¦ä¸²ä¸­å–å€¼
-	 *  (1)ä½œç”¨äºæ–¹æ³•å‚æ•°
-	 *     ç±»ä¼¼äº String param = request.getParameter("param");
-	 *     å¦‚æœæŸ¥è¯¢å‚æ•°åå’Œæ–¹æ³•åç›¸åŒæ¥æ²¡æœ‰å¿…è¦ä½¿ç”¨@RequestParamæ³¨è§£ Spring mvcä¼šè‡ªåŠ¨ç»‘å®š
-	 *  (2)å±æ€§è¯´æ˜
-	 *     valueï¼šrequestä¸­å‚æ•°åç§°
-	 *     requiredï¼šæ˜¯å¦å¿…é¡»
-	 *     defaultValueï¼šé»˜è®¤å€¼
+	 * ×¢½â@RequestParamÓÃÓÚ´Ó²éÑ¯×Ö·û´®ÖĞÈ¡Öµ
+	 *      ÀàËÆÓÚ String param = request.getParameter("param");
+	 *      Èç¹û²éÑ¯²ÎÊıÃûºÍ·½·¨ÃûÏàÍ¬½ÓÃ»ÓĞ±ØÒªÊ¹ÓÃ@RequestParam×¢½â Spring mvc»á×Ô¶¯°ó¶¨
 	 * 
-	 * æ³¨è§£@ModelAttributeå¯ä»¥ä½œç”¨äºæ–¹æ³•çº§åˆ«æˆ–è€…æ–¹æ³•å‚æ•°ä¸Š
-	 *  (1)ä½œç”¨åŸŸæ–¹æ³•æˆ–è€…å‚æ•°
-	 * 	         å¦‚æœä½œç”¨äºæ–¹æ³•ä¸ŠSpring MVCåœ¨è°ƒç”¨ç›®æ ‡å¤„ç†æ–¹æ³•å‰ï¼Œä¼šå…ˆé€ä¸ªè°ƒç”¨åœ¨æ–¹æ³•çº§ä¸Šæ ‡æ³¨äº†@ModelAttribute çš„æ–¹æ³•
-	 * 	         å¦‚æœä½œç”¨äºæ–¹æ³•å‚æ•°ç”¨äºä»flashå±æ€§æˆ–è€…ä»modelä¸­è·å–å€¼
-	 *  (2)å±æ€§è¯´æ˜
-	 *     valueï¼šç»‘å®šåˆ°modelä¸­å±æ€§çš„åç§°
-	 * 
-	 * å…³äºå¾€å‰ç«¯ä¼ å€¼ï¼šå¯ä»¥åœ¨æ–¹æ³•ä¸­å®šä¹‰Modelã€Mapå¾€modelã€Mapä¸­å­˜å€¼æˆ–è€…æ–¹æ³•è¿”å›ModelAndViewï¼›
-	 * @param id äº§å“ID
-	 * @param model æ¨¡å‹
+	 * ×¢½â@ModelAttribute¿ÉÒÔ×÷ÓÃÓÚ·½·¨¼¶±ğ»òÕß·½·¨²ÎÊıÉÏ
+	 * 		Èç¹û×÷ÓÃÓÚ·½·¨ÉÏSpring MVCÔÚµ÷ÓÃÄ¿±ê´¦Àí·½·¨Ç°£¬»áÏÈÖğ¸öµ÷ÓÃÔÚ·½·¨¼¶ÉÏ±ê×¢ÁË@ModelAttribute µÄ·½·¨
+	 * 		Èç¹û×÷ÓÃÓÚ·½·¨²ÎÊıÓÃÓÚ´ÓflashÊôĞÔ»òÕß´ÓmodelÖĞ»ñÈ¡Öµ
+	 * ¹ØÓÚÍùÇ°¶Ë´«Öµ£º¿ÉÒÔÔÚ·½·¨ÖĞ¶¨ÒåModel¡¢MapÍùmodel¡¢MapÖĞ´æÖµ»òÕß·½·¨·µ»ØModelAndView£»
+	 * @param id ²úÆ·ID
+	 * @param model Ä£ĞÍ
 	 * @return url
 	 */
 	//http://localhost:8080/springmvc-example-03/product/viewproduct/1
@@ -132,29 +112,29 @@ public class ProductController {
 	public String viewProduct(@PathVariable("id") long id,
 			@RequestParam(value="param1",required=false,defaultValue="456") String param,
 			@ModelAttribute(value = "msg") String msg, Model model) {
-		log.info("viewproductè¢«è°ƒç”¨äº†â€¦â€¦");
-		log.info("è·¯å¾„å˜é‡IDçš„å€¼ï¼š" + id);
-		log.info("é€šè¿‡flashå±æ€§ä¼ é€’çš„å€¼ï¼š" + msg);
+		log.info("viewproduct±»µ÷ÓÃÁË¡­¡­");
+		log.info("Â·¾¶±äÁ¿IDµÄÖµ£º" + id);
+		log.info("Í¨¹ıflashÊôĞÔ´«µİµÄÖµ£º" + msg);
 		/**
-		 * è°ƒç”¨Serviceå±‚æ ¹æ®ä¸»é”®IDæŸ¥æ‰¾
+		 * µ÷ÓÃService²ã¸ù¾İÖ÷¼üID²éÕÒ
 		 */
 		Product product = new Product();
 		product.setId(1L);
-		product.setName("Spring MVCå¼€å‘æŒ‡å—");
-		product.setDescription("è®²è¿°Spring MVCå¼€å‘æŠ€æœ¯");
+		product.setName("Spring MVC¿ª·¢Ö¸ÄÏ");
+		product.setDescription("½²ÊöSpring MVC¿ª·¢¼¼Êõ");
 		product.setPrice(23.00);
 		model.addAttribute("product", product);
 		return "product/productdetails";
 	}
 	
 	/***
-	 * æ³¨è§£@ModelAttributeæ–¹æ³•çº§åˆ«æ³¨è§£
-	 * 	ï¼ˆ1ï¼‰ä½œç”¨äºvoidçš„æ–¹æ³•æ¯ä¸€ä¸ªè¯·æ±‚å¤„ç†å‰éƒ½ä¼šè¢«è°ƒç”¨ï¼Œæ–¹æ³•ä¸­æ·»åŠ åˆ°modelä¼šè¢«æ·»åŠ åˆ°ç›®æ ‡æ–¹æ³•çš„modelä¸­
-	 * 	ï¼ˆ2ï¼‰ä½œç”¨åŸŸæœ‰è¿”å›å€¼çš„æ–¹æ³•æ—¶ï¼Œæ¯ä¸€ä¸ªè¯·æ±‚å¤„ç†å‰éƒ½ä¼šè¢«è°ƒç”¨,ä¼šéšå«çš„å°†è¿”å›å€¼æ·»åŠ åˆ°ç›®æ ‡çš„modelä¸­ï¼Œ
-	 * 	            å¦‚æœModelAttributeçš„valueå±æ€§æœªæŒ‡å®šï¼Œå…¶keyæ˜¯æ‰€æ·»åŠ å¯¹è±¡ç±»è¡Œçš„ç±»å‹éšå«è¡¨ç¤º ä¾‹å¦‚è¿”å›ä¸€ä¸ªProductå¯¹è±¡åˆ™ï¼Œå¯¹åº”çš„keyä¸ºproduct
-	 *      å¦‚æœæŒ‡å®šäº†ModelAttributeçš„valueå€¼åˆ™æ·»åŠ åˆ°modelä¸­çš„å€¼çš„keyä¸ºæŒ‡å®šçš„valueå€¼
-	 *  ï¼ˆ3ï¼‰ä¸@RequestMappingåŒæ—¶æ³¨è§£åœ¨æ–¹æ³•çº§åˆ«
-	 *      è¿™æ—¶è¿™ä¸ªæ–¹æ³•çš„è¿”å›å€¼å¹¶ä¸æ˜¯è¡¨ç¤ºä¸€ä¸ªè§†å›¾åç§°ï¼Œè€Œæ˜¯modelå±æ€§çš„å€¼ï¼Œè§†å›¾åç§°ç”±RequestToViewNameTranslatoræ ¹æ®è¯·æ±‚urlè½¬æ¢ä¸ºé€»è¾‘è§†å›¾åç§°ã€‚
+	 * ×¢½â@ModelAttribute·½·¨¼¶±ğ×¢½â
+	 * 	£¨1£©×÷ÓÃÓÚvoidµÄ·½·¨Ã¿Ò»¸öÇëÇó´¦ÀíÇ°¶¼»á±»µ÷ÓÃ£¬·½·¨ÖĞÌí¼Óµ½model»á±»Ìí¼Óµ½Ä¿±ê·½·¨µÄmodelÖĞ
+	 * 	£¨2£©×÷ÓÃÓÚÓĞ·µ»ØÖµµÄ·½·¨Ê±£¬Ã¿Ò»¸öÇëÇó´¦ÀíÇ°¶¼»á±»µ÷ÓÃ,»áÒşº¬µÄ½«·µ»ØÖµÌí¼Óµ½Ä¿±êµÄmodelÖĞ£¬
+	 * 	            Èç¹ûModelAttributeµÄvalueÊôĞÔÎ´Ö¸¶¨£¬ÆäkeyÊÇËùÌí¼Ó¶ÔÏóÀàĞĞµÄÀàĞÍÒşº¬±íÊ¾ ÀıÈç·µ»ØÒ»¸öProduct¶ÔÏóÔò£¬¶ÔÓ¦µÄkeyÎªproduct
+	 *      Èç¹ûÖ¸¶¨ÁËModelAttributeµÄvalueÖµÔòÌí¼Óµ½modelÖĞµÄÖµµÄkeyÎªÖ¸¶¨µÄvalueÖµ
+	 *  £¨3£©Óë@RequestMappingÍ¬Ê±×¢½âÔÚ·½·¨¼¶±ğ
+	 *      ÕâÊ±Õâ¸ö·½·¨µÄ·µ»ØÖµ²¢²»ÊÇ±íÊ¾Ò»¸öÊÓÍ¼Ãû³Æ£¬¶øÊÇmodelÊôĞÔµÄÖµ£¬ÊÓÍ¼Ãû³ÆÓÉRequestToViewNameTranslator¸ù¾İÇëÇóurl×ª»»ÎªÂß¼­ÊÓÍ¼Ãû³Æ¡£
 	 * @param abc
 	 * @param model
 	 */
@@ -164,17 +144,17 @@ public class ProductController {
     }
     
     /***
-     * æ³¨è§£@RequestMappingå’Œ@ModelAttributeåŒæ—¶ä½œç”¨äºæ–¹æ³•çº§åˆ«
-     * æ­¤æ—¶è¿”å›å€¼ä¸å†æ˜¯é€»è¾‘è§†å›¾çš„åç§°è€Œæ˜¯modelä¸­çš„å€¼è€Œ@ModelAttributeç”¨äºå£°æ˜modelä¸­å€¼çš„key
-     * è§†å›¾ç”±
-     * æ³¨è§£@ModelAttribute("attributeName")æŒ‡å®šmodelä¸­æ•°æ®çš„key
-     * @rerutn è¿”å›modelä¸­æ•°æ®çš„å€¼RequestToViewNameTranslatoræ ¹æ®è¯·æ±‚"/index"è½¬æ¢æˆå¯¹åº”çš„é€»è¾‘è§†å›¾"index"
+     * ×¢½â@RequestMappingºÍ@ModelAttributeÍ¬Ê±×÷ÓÃÓÚ·½·¨¼¶±ğ
+     * ´ËÊ±·µ»ØÖµ²»ÔÙÊÇÂß¼­ÊÓÍ¼µÄÃû³Æ¶øÊÇmodelÖĞµÄÖµ¶ø@ModelAttributeÓÃÓÚÉùÃ÷modelÖĞÖµµÄkey
+     * ÊÓÍ¼ÓÉ
+     * ×¢½â@ModelAttribute("attributeName")Ö¸¶¨modelÖĞÊı¾İµÄkey
+     * @rerutn ·µ»ØmodelÖĞÊı¾İµÄÖµRequestToViewNameTranslator¸ù¾İÇëÇó"/index"×ª»»³É¶ÔÓ¦µÄÂß¼­ÊÓÍ¼"index"
      */
     //http://localhost:8080/springmvc-example-03/product/index
     @RequestMapping(value = "/index")  
     @ModelAttribute("attributeName")
     public String index(){
-    	log.info("è¿›å…¥äº†indexâ€¦â€¦");
+    	log.info("½øÈëÁËindex¡­¡­");
     	return "attributeValue";
     }
 }

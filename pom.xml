@@ -93,6 +93,12 @@
 				<artifactId>spring-test</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			<!-- 配置Spring aop的jar依赖 -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
 			<!-- 配置Spring 事物的jar依赖 -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -112,12 +118,12 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
-				<artifactId>spring-aop</artifactId>
+				<artifactId>spring-oxm</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
-				<artifactId>spring-oxm</artifactId>
+				<artifactId>spring-test</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>

@@ -1,4 +1,4 @@
-数据绑定及表单标签库
+综合实例：
 访问地址：
 http://localhost:8080/springmvc-example-05/book/booklist
 

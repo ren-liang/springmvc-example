@@ -32,5 +32,10 @@ public class BookService implements IBookService {
 	public List<Book> getAllBooks() {
 		return bookDao.selectByProperties(new Book());
 	}
+	
+	@Override
+	public void deleteById(Integer id) {
+		bookDao.deleteByPrimaryKey(id);
+	}
 
 }
