@@ -1,6 +1,4 @@
-综合实例：
-访问地址：
-http://localhost:8080/springmvc-example-05/book/booklist
+璁块棶鍦板潃锛歨ttp://localhost:8080/springmvc-example-05/book/booklist
 
 
 
